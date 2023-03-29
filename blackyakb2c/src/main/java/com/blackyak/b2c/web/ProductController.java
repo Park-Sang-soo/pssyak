@@ -14,6 +14,7 @@ import com.blackyak.b2c.service.ProductService;
 import com.blackyak.b2c.vo.ProductVo;
 
 //import com.blackyak.b2c.vo.ProductJsonVo;
+//수정 테스트1111
 
 @RestController // 해당 클래스를 컨트롤러로 동작하게 한다. 
 @RequestMapping("/products")
