@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 @Mapper
 public interface ProductDao {
 	
-	List<ProductVo> selectProductList(String prod_cd);	
+	List<ProductVo> selectProductList(String prod_cd);	 
 	
 	ProductVo selectProductInfo(Model model);
 }
