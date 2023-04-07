@@ -1,4 +1,4 @@
-package com.blackyak.b2c.config;
+package com.blackyak.b2c.common.config;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,7 +29,7 @@ public class SwaggerConfig {
                     .apiInfo(swaggerInfo())
                     .groupName("Test")
                     .select()
-                    .apis(RequestHandlerSelectors.basePackage("com.blackyak.b2c.web"))
+                    .apis(RequestHandlerSelectors.basePackage("com.blackyak.b2c.product.controller"))
                     .paths(PathSelectors.ant("/**"))
                     .build()
                     .useDefaultResponseMessages(false);
