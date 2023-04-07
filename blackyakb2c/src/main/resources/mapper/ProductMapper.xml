@@ -3,7 +3,7 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.blackyak.b2c.dao.ProductDao">
+<mapper namespace="com.blackyak.b2c.dao.ProductMapper">
   <select id="selectProductList" resultType="com.blackyak.b2c.vo.ProductVo">
        	SELECT v_comp_cd as comp_cd
 		     , v_prod_cd as prod_cd
