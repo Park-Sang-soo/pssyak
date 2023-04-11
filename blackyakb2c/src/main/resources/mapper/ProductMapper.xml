@@ -3,8 +3,9 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.blackyak.b2c.dao.ProductMapper">
-  <select id="selectProductList" resultType="com.blackyak.b2c.vo.ProductVo">
+<mapper namespace="com.blackyak.b2c.product.mapper.ProductMapper">
+	
+  <select id="selectProductList" resultType="com.blackyak.b2c.product.mapper.dto.ProductDto">
        	SELECT v_comp_cd as comp_cd
 		     , v_prod_cd as prod_cd
 			 , v_prod_nm as prod_nm
@@ -13,11 +14,12 @@
        	   from US_B2C.V_MALL_PROD_ALL_INFO
        	  where v_prod_cd = #{prod_cd}
   </select>
-  <select id="selectProductInfo" parameterType="com.blackyak.b2c.vo.ProductVo" resultType="com.blackyak.b2c.vo.ProductVo">
+  
+  <select id="selectProductInfo" parameterType="com.blackyak.b2c.product.mapper.dto.ProductDto" resultType="com.blackyak.b2c.product.mapper.dto.ProductDto">
        	SELECT V_COMP_CD        as comp_cd
 		     , V_REF_COMP_CD    as ref_comp_cd
 		     , V_GOODS_GB       as goods_gb
-		     , V_BRND_CD        as brnd_cd
+		     , V_BRND_CD        as brnd_cdx
 		     , V_PROD_CD        as prod_cd
 		     , V_PROD_NM        as prod_nm
 		     , V_PROD_DIV       as prod_div
@@ -41,7 +43,8 @@
 		     , V_ORIG_NAT_NM    as orig_nat_nm
 		     , V_DISP_ORD       as disp_ord
        	   from US_B2C.V_MALL_PROD_ALL_INFO
-       	  where v_prod_cd = #{prod_cd}
+       	  where v_comp_cd = #{comp_cd}
+       	    and v_prod_cd = #{prod_cd}
        	    and v_colr_cd = #{colr_cd}
        	    and v_size_cd = #{size_cd}
   </select>

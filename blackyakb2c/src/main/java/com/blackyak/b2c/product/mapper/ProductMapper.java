@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ProductMapper {
 	
-	//List<ProductVo> selectProductList(String prod_cd);	 
+	//List<ProductVo> selectProductList(String prod_cd);		
 	
-	ProductDto selectProductInfo();
+	ProductDto selectProductInfo(ProductDto productDto);
 }

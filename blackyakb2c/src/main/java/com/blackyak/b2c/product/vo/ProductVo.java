@@ -4,21 +4,30 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
-
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 public class ProductVo {	
-	
+			
 	@Getter
+	@Setter
+	@Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
 	public static class Request {
-		private String comp_cd;
-		private String prod_cd;
-		private String colr_cd;
-		private String size_cd;
+		private String compCd;
+		private String prodCd;
+		private String colrCd;
+		private String sizeCd;
 		
 	}
 	
 	@Getter
 	@Setter
+	@Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
 	public static class Response {
 		@JsonProperty(value="compCd")
 		private String comp_cd;
@@ -84,7 +93,7 @@ public class ProductVo {
 		private String size_cd;
 
 		@JsonProperty(value="normRtalPrce")
-		private String norm_rtal_prce;
+		private int norm_rtal_prce;
 
 		@JsonProperty(value="madeYymm")
 		private String made_yymm;
@@ -96,10 +105,9 @@ public class ProductVo {
 		private String orig_nat_nm;
 
 		@JsonProperty(value="dispOrd")
-		private String disp_ord; 
+		private int disp_ord; 
 	}
-	
-	
-	
+
+	public static Request Request;
 
 }

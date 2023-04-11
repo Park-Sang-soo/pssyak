@@ -1,24 +1,21 @@
 package com.blackyak.b2c.product.controller;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.blackyak.b2c.product.mapper.dto.ProductDto;
 import com.blackyak.b2c.product.service.ProductService;
 import com.blackyak.b2c.product.vo.ProductVo;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
-//import com.blackyak.b2c.vo.ProductJsonVo;
-//수정 테스트1111
+@Api(tags = "product", description = "상품 API 정보를 제공하는 Controller")
 @RestController // 해당 클래스를 컨트롤러로 동작하게 한다. 
 @RequestMapping("/products")
 public class ProductController {
-	
-	@Autowired
+		
 	ProductService productService;
 	
 	/*
@@ -29,33 +26,18 @@ public class ProductController {
 		
 		return productList;
 	}
-	*/
+	*/	
 	
-	@GetMapping("/product-info")
-	public ProductDto productInfo(@RequestBody ProductVo Request) throws Exception {
-						
-		ProductDto Response = productService.selectProductInfo(Request);
+	@ApiOperation(value = "제품상세정보조회", notes = "제품상세정보를 조회합니다.")
+	@GetMapping("/product/{prodCd}")
+	public ProductVo.Response getProduct(@PathVariable("prodCd") String prodCd, ProductVo.Request request){
+	//public ProductVo.Response getProduct(ProductVo.Request request){
+					
+		request.setProdCd(prodCd);
+		ProductVo.Response response = ProductService.selectProductInfo(request);
 				
-		return Response;
-		
+		return response;		
 	}
-		
-	/*
-	@GetMapping("/product-info")
-	public ProductVo productInfo( 
-			@RequestParam(value="prod_cd", required=false, defaultValue="") String prod_cd,
-			@RequestParam(value="colr_cd", required=false, defaultValue="") String colr_cd,
-			@RequestParam(value="size_cd", required=false, defaultValue="") String size_cd,
-			Model model) throws Exception {		
-		
-		model.addAttribute("prod_cd", prod_cd);
-		model.addAttribute("colr_cd", colr_cd);
-		model.addAttribute("size_cd", size_cd);
-		
-		ProductVo productInfo = productService.selectProductInfo(model);
-				
-		return productInfo;
 	
-	}
-	*/
+	
 }

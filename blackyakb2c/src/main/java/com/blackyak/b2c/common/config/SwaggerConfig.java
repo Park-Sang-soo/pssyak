@@ -19,6 +19,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+	
+	private static final String API_NAME = "BLACKYAK B2C API";
+	private static final String API_VERSION = "1.0";
+	private static final String API_DESCRIPTION = "자사몰↔ERP API";
 
     @Bean
     public Docket SwaggerApi(ServletContext servletContext) {
@@ -49,11 +53,12 @@ public class SwaggerConfig {
     }
     
     private ApiInfo swaggerInfo() {
-        return new ApiInfoBuilder().title("BLACKYAK B2C API TEST")
-                    .description("Swagger UI Test")
-                    .license("productInfo")
+        return new ApiInfoBuilder()
+        		    .title(API_NAME)
+                    .description(API_DESCRIPTION)
+                    .license("API")
                     .licenseUrl("http://localhost:8080")
-                    .version("1.0")
+                    .version(API_VERSION)
                     .build();
       }
 }
