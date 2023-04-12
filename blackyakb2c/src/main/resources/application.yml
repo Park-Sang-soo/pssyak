@@ -1,0 +1,20 @@
+server:
+  port: '8080'
+  
+spring:
+  datasource:
+  #DB설정
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@121.254.249.72:9521:YAKERP
+    username: US_B2C    
+    password: US_B2C
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+      
+mybatis:
+#Xml
+  mapper-locations: classpath:mapper/*.xml
+#Dto
+  type-aliases-package: com.blackyak.b2c.product.mapper.dto
+
