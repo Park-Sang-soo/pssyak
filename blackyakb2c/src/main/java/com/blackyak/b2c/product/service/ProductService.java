@@ -32,12 +32,6 @@ public class ProductService {
 		System.out.println("Service >>>"+request.getProdCd());
 		System.out.println("Service >>>"+request.getColrCd());
 		System.out.println("Service >>>"+request.getSizeCd());
-		System.out.println("Service >>>"+productConditionDto);
-		
-		System.out.println("Dto >>>"+productConditionDto.getProd_cd());
-		System.out.println("Dto >>>"+productConditionDto.getColr_cd());
-		System.out.println("Dto >>>"+productConditionDto.getSize_cd());
-		System.out.println("Dto >>>"+productConditionDto.getComp_cd());
 		
 		ProductDto productResultDto = productMapper.selectProductInfo(productConditionDto);
 		
