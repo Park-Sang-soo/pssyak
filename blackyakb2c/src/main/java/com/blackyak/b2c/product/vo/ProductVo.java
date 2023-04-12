@@ -22,7 +22,7 @@ public class ProductVo {
 		@ApiModelProperty(value = "회사코드")
 		private String compCd;		
 		
-		@ApiModelProperty(value = "제품코드")
+		@ApiModelProperty(value = "제품코드", hidden = true)
 		private String prodCd;		
 		
 		@ApiModelProperty(value = "칼라코드")
@@ -38,7 +38,6 @@ public class ProductVo {
 	@Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    @Schema(description = "상품상세정보 응답")
 	public static class Response {
 				
 		@JsonProperty(value="compCd")

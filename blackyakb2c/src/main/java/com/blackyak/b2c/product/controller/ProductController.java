@@ -41,8 +41,8 @@ public class ProductController {
         @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
         
 	})	
-	@GetMapping("/product/{prodCd}")
-	public ProductVo.Response getProduct(@Parameter(description = "제품코드", required = true) @PathVariable("prodCd") String prodCd, ProductVo.Request request){		
+	@GetMapping("/product/{prodCd}") //@Parameter(description = "제품코드", required = true) 
+	public ProductVo.Response getProduct(@Parameter(description = "제품코드") @PathVariable("prodCd") String prodCd, ProductVo.Request request){		
 					
 		request.setProdCd(prodCd);
 		ProductVo.Response response = ProductService.selectProductInfo(request);
