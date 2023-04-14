@@ -1,4 +1,4 @@
-package com.blackyak.b2c.product.mapper.dto;
+package com.blackyak.b2c.api.product.mapper.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

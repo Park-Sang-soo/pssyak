@@ -1,4 +1,4 @@
-package com.blackyak.b2c.product.vo;
+package com.blackyak.b2c.api.product.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,17 +1,13 @@
-package com.blackyak.b2c.product.service;
+package com.blackyak.b2c.api.product.service;
 
 import org.springframework.stereotype.Service;
 
-import com.blackyak.b2c.product.mapper.ProductMapper;
-import com.blackyak.b2c.product.mapper.dto.ProductDto;
-import com.blackyak.b2c.product.vo.ProductVo;
+import com.blackyak.b2c.api.product.mapper.ProductMapper;
+import com.blackyak.b2c.api.product.mapper.dto.ProductDto;
+import com.blackyak.b2c.api.product.vo.ProductVo;
 
 @Service
-public class ProductService {
-	
-	//List<ProductVo> selectProductList(String prod_cd) throws Exception;
-		
-	//ProductDto selectProductInfo(ProductVo request);
+public class ProductService {	
 	
 	private static ProductMapper productMapper;
 
@@ -27,11 +23,6 @@ public class ProductService {
 				.colr_cd(request.getColrCd())
 				.size_cd(request.getSizeCd())
 				.build();
-		
-		System.out.println("Service >>>"+request.getCompCd());
-		System.out.println("Service >>>"+request.getProdCd());
-		System.out.println("Service >>>"+request.getColrCd());
-		System.out.println("Service >>>"+request.getSizeCd());
 		
 		ProductDto productResultDto = productMapper.selectProductInfo(productConditionDto);
 		

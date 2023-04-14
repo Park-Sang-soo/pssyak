@@ -14,5 +14,5 @@ mybatis:
 #Xml
   mapper-locations: classpath:mapper/*.xml
 #Dto
-  type-aliases-package: com.blackyak.b2c.product.mapper.dto
+  type-aliases-package: com.blackyak.b2c.api.product.mapper.dto
 
