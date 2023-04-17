@@ -5,7 +5,7 @@
 
 <mapper namespace="com.blackyak.b2c.api.product.mapper.ProductMapper">
   
-  <select id="selectProductInfo" parameterType="com.blackyak.b2c.api.product.mapper.dto.ProductDto" resultType="com.blackyak.b2c.api.product.mapper.dto.ProductDto">
+  <select id="selectProductInfo" parameterType="ProductDto" resultType="ProductDto">
        	SELECT V_COMP_CD        as compCd
 		     , V_REF_COMP_CD    as refCompCd
 		     , V_GOODS_GB       as goodsGb
