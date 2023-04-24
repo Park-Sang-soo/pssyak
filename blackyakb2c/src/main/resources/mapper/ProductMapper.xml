@@ -3,46 +3,39 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.blackyak.b2c.dao.ProductDao">
-  <select id="selectProductList" resultType="com.blackyak.b2c.vo.ProductVo">
-       	SELECT v_comp_cd as comp_cd
-		     , v_prod_cd as prod_cd
-			 , v_prod_nm as prod_nm
-			 , v_colr_cd as colr_cd
-			 , v_size_cd as size_cd
+<mapper namespace="com.blackyak.b2c.common.db.mapper.ProductMapper">
+  
+  <select id="selectProductInfo" parameterType="ProductDto" resultType="ProductDto">
+       	SELECT V_COMP_CD        as compCd
+		     , V_REF_COMP_CD    as refCompCd
+		     , V_GOODS_GB       as goodsGb
+		     , V_BRND_CD        as brndCd
+		     , V_PROD_CD        as prodCd
+		     , V_PROD_NM        as prodNm
+		     , V_PROD_DIV       as prodDiv
+		     , V_PROD_DIV_NM    as prodDiv_nm
+		     , V_GOOD_KIND_CD   as goodKindCd
+		     , V_GOOD_KIND_NM   as goodKindNm
+		     , V_PLAN_YEAR      as planYear
+		     , V_PLAN_YEAR_NM   as planYearNm
+		     , V_SESN_CD        as sesnCd
+		     , V_SESN_NM        as sesnCm
+		     , V_SEX_DIV        as sexDiv
+		     , V_SEX_DIV_NM     as sexDivNm
+		     , V_PROD_LINE_CD   as prodLineCd
+		     , V_PROD_LINE_NM   as prodLineNm
+		     , V_COLR_CD        as colrCd
+		     , V_COLR_NM        as colrNm
+		     , V_SIZE_CD        as sizeCd
+		     , V_NORM_RTAL_PRCE as normRtalPrce
+		     , V_MADE_YYMM      as madeYymm
+		     , V_ORIG_NAT_CD    as origNatCd
+		     , V_ORIG_NAT_NM    as origNatNm
+		     , V_DISP_ORD       as dispOrd
        	   from US_B2C.V_MALL_PROD_ALL_INFO
-       	  where v_prod_cd = #{prod_cd}
-  </select>
-  <select id="selectProductInfo" parameterType="com.blackyak.b2c.vo.ProductVo" resultType="com.blackyak.b2c.vo.ProductVo">
-       	SELECT V_COMP_CD        as comp_cd
-		     , V_REF_COMP_CD    as ref_comp_cd
-		     , V_GOODS_GB       as goods_gb
-		     , V_BRND_CD        as brnd_cd
-		     , V_PROD_CD        as prod_cd
-		     , V_PROD_NM        as prod_nm
-		     , V_PROD_DIV       as prod_div
-		     , V_PROD_DIV_NM    as prod_div_nm
-		     , V_GOOD_KIND_CD   as good_kind_cd
-		     , V_GOOD_KIND_NM   as good_kind_nm
-		     , V_PLAN_YEAR      as plan_year
-		     , V_PLAN_YEAR_NM   as plan_year_nm
-		     , V_SESN_CD        as sesn_cd
-		     , V_SESN_NM        as sesn_nm
-		     , V_SEX_DIV        as sex_div
-		     , V_SEX_DIV_NM     as sex_div_nm
-		     , V_PROD_LINE_CD   as prod_line_cd
-		     , V_PROD_LINE_NM   as prod_line_nm
-		     , V_COLR_CD        as colr_cd
-		     , V_COLR_NM        as colr_nm
-		     , V_SIZE_CD        as size_cd
-		     , V_NORM_RTAL_PRCE as norm_rtal_prce
-		     , V_MADE_YYMM      as made_yymm
-		     , V_ORIG_NAT_CD    as orig_nat_cd
-		     , V_ORIG_NAT_NM    as orig_nat_nm
-		     , V_DISP_ORD       as disp_ord
-       	   from US_B2C.V_MALL_PROD_ALL_INFO
-       	  where v_prod_cd = #{prod_cd}
-       	    and v_colr_cd = #{colr_cd}
-       	    and v_size_cd = #{size_cd}
+       	  where v_comp_cd = #{compCd}
+       	    and v_prod_cd = #{prodCd}
+       	    and v_colr_cd = #{colrCd}
+       	    and v_size_cd = #{sizeCd}
   </select>
 </mapper>
