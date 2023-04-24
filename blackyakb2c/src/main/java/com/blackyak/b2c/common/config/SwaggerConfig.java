@@ -40,48 +40,4 @@ public class SwaggerConfig {
                 .version(API_VERSION)
                 .build();
     }
-	
-	/*
-	private static final String API_NAME = "BLACKYAK B2C API";
-	private static final String API_VERSION = "1.0";
-	private static final String API_DESCRIPTION = "자사몰↔ERP REST API";
-
-    @Bean
-    public Docket SwaggerApi(ServletContext servletContext) {
-
-        return new Docket(DocumentationType.SWAGGER_2)
-                    .consumes(getConsumeContentTypes())
-                    .produces(getProduceContentTypes())
-                    .apiInfo(swaggerInfo())
-                    .groupName("Test")
-                    .select()
-                    .apis(RequestHandlerSelectors.basePackage("com.blackyak.b2c.product"))
-                    .paths(PathSelectors.ant("/**"))
-                    .build()
-                    .useDefaultResponseMessages(false);
-    }
-
-    private Set<String> getConsumeContentTypes() {
-        Set<String> consumes = new HashSet<>();
-        consumes.add("application/json;charset=UTF-8");
-        consumes.add("application/x-www-form-urlencoded");
-        return consumes;
-    }
-
-    private Set<String> getProduceContentTypes() {
-        Set<String> produces = new HashSet<>();
-        produces.add("application/json;charset=UTF-8");
-        return produces;
-    }
-    
-    private ApiInfo swaggerInfo() {
-        return new ApiInfoBuilder()
-        		    .title(API_NAME)
-                    .description(API_DESCRIPTION)
-                    .license("API")
-                    .licenseUrl("http://localhost:8080")
-                    .version(API_VERSION)
-                    .build();
-      }
-      */
 }
