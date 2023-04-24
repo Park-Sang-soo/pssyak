@@ -2,10 +2,21 @@ package com.blackyak.b2c.api.product.service;
 
 import org.springframework.stereotype.Service;
 
-import com.blackyak.b2c.api.product.mapper.ProductMapper;
-import com.blackyak.b2c.api.product.mapper.dto.ProductDto;
+import com.blackyak.b2c.common.db.mapper.ProductMapper;
+import com.blackyak.b2c.common.db.dto.ProductDto;
 import com.blackyak.b2c.api.product.vo.ProductVo;
 
+/**
+ * 제품 상세정보 조회
+ * 
+ * @param companyCode 회사코드
+ * @param productCode 제품코드
+ * @param colorCode 칼라코드
+ * @param sizeCode 사이즈코드
+ * 
+ * @return 제품 상세정보 목록
+ *
+ */
 @Service
 public class ProductService {	
 	
@@ -54,6 +65,5 @@ public class ProductService {
 				.originNativeName(productResultDto.getOrigNatNm())
 				.displayOrder(productResultDto.getDispOrd())
 				.build();
-				
 	}
 }

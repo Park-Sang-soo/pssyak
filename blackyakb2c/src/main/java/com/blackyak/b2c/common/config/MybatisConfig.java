@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
-@MapperScan(value = "com.blackyak.b2c.api.product.mapper")
+@MapperScan(value = "com.blackyak.b2c.common.db.mapper")
 public class MybatisConfig {
 
 	@Bean
@@ -21,7 +21,7 @@ public class MybatisConfig {
 		sessionFactoryBean.setDataSource(dataSource);
 		  		
 		sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mapper/*Mapper.xml"));		        
-		sessionFactoryBean.setTypeAliasesPackage("com.blackyak.b2c.api.product.mapper.dto");
+		sessionFactoryBean.setTypeAliasesPackage("com.blackyak.b2c.common.db.dto");
 	 
 		return sessionFactoryBean.getObject();
 	}

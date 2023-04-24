@@ -22,7 +22,10 @@ public class ProductController {
 	@Tag(name = "Product")
 	@Operation(summary = "제품상세정보조회", description = "제품코드를 받아 제품상세정보를 조회하는 API")
 	@GetMapping("/product/{productCode}")
-	public ProductVo.Response getProduct(@Parameter(description = "제품코드") @PathVariable("productCode") String productCode, ProductVo.Request request){		
+	public ProductVo.Response getProduct(
+			@Parameter(description = "제품코드") 
+			@PathVariable("productCode") String productCode, 
+			ProductVo.Request request){		
 					
 		request.setProductCode(productCode);
 		ProductVo.Response response = ProductService.selectProductInfo(request);
