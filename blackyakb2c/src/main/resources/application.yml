@@ -8,3 +8,14 @@ spring:
     url: jdbc:oracle:thin:@121.254.249.72:9521:YAKERP
     username: US_B2C    
     password: US_B2C
+  #JPA설정
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    
+    
+
+
+    

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.blackyak.b2c.common.db.mapper.OrderMapper">
+  
+  <select id="selectOrderCheck" parameterType="OrderDto" resultType="OrderDto">
+       	SELECT EAII_NUMB        as eaiiNumb
+		     , EAII_YSNO        as eaiiYsno
+       	   from US_B2C.INF_TSC_ORD_RCV
+       	  where CO_ORD_NO = #{coOrdNo}
+       	    and CO_SEQ    = #{coSeq}
+  </select>
+</mapper>
