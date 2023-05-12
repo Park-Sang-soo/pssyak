@@ -5,15 +5,23 @@ spring:
   datasource:
   #DB설정
     driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@121.254.249.72:9521:YAKERP
+    url: jdbc:oracle:thin:@121.254.249.77:1521:YAKERP
     username: US_B2C    
     password: US_B2C
-  #JPA설정
-  jpa:
+  jpa:    
     open-in-view: false
+    database: oracle
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     show-sql: true
+    properties:
+      hibernate:
+        '[format_sql]': true
+    
+      
+
+    
+    
     
     
 

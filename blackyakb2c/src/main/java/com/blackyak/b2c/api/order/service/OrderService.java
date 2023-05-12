@@ -1,41 +1,45 @@
 package com.blackyak.b2c.api.order.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
-import com.blackyak.b2c.common.db.mapper.OrderMapper;
-import com.blackyak.b2c.common.db.dto.OrderDto;
-import com.blackyak.b2c.api.order.vo.OrderVo;
+import com.blackyak.b2c.common.db.entity.OrderStateEntity;
+import com.blackyak.b2c.common.db.repository.OrderStateRepository;
 
-/**
- * 주문번호 중복체킄 위한 로직
- * 
- * @param coOrderNo 주문번호
- * @param coSequence 주문순번
- * 
- * @return 일련번호, 전송정보
- *
- */
+import lombok.RequiredArgsConstructor;
+
+import com.blackyak.b2c.api.order.vo.OrderStateVo;
+
+@RequiredArgsConstructor
 @Service
 public class OrderService {	
+		
+	private final OrderStateRepository orderStateRepository;
 	
-	private static OrderMapper orderMapper;
-
-    public OrderService(OrderMapper orderMapper) {
-        this.orderMapper = orderMapper;
+	public List<OrderStateVo.Response> findOrderState(OrderStateVo.Request request) {
+		
+		List<OrderStateEntity> orderStateList = orderStateRepository.findByCoOrderNoAndCoSequence(request.getCoOrderNo(), request.getCoSequence());		
+		
+		List<OrderStateVo.Response> responseList = orderStateList.stream()
+											        .map(OrderStateEntity -> {
+											            OrderStateVo.Response response = new OrderStateVo.Response();
+											            response.setEaiiNumber(OrderStateEntity.getEaiiNumber());
+											            response.setEaiiType(OrderStateEntity.getEaiiType());
+											            response.setEaiiYesNo(OrderStateEntity.getEaiiYesNo());
+											            response.setEaicDate(OrderStateEntity.getEaicDate());
+											            response.setEaisDate(OrderStateEntity.getEaisDate());
+											            response.setCompanyCode(OrderStateEntity.getCompanyCode());
+											            response.setCoOrderNo(OrderStateEntity.getCoOrderNo());
+											            response.setCoSequence(OrderStateEntity.getCoSequence());
+											            response.setTransmissionState(OrderStateEntity.getTransmissionState());
+											            response.setCancelYn(OrderStateEntity.getCancelYn());
+											            response.setErrorName(OrderStateEntity.getErrorName());
+											            return response;
+											        })
+											        .collect(Collectors.toList());
+		return responseList;
     }
 	
-	public static OrderVo.Response selectOrderCheck(OrderVo.Request request) {
-		
-		OrderDto orderConditionDto = OrderDto.builder()
-				.coOrdNo(request.getCoOrderNo())
-				.coSeq(request.getCoSequence())
-				.build();
-		
-		OrderDto productResultDto = orderMapper.selectOrderCheck(orderConditionDto);
-		
-		return OrderVo.Response.builder()
-				.eaiiNumber(productResultDto.getEaiiNumb())				
-				.eaiiYsno(productResultDto.getEaiiYsno())
-				.build();
-	}
 }
