@@ -1,5 +1,7 @@
 package com.blackyak.b2c.api.product.vo;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -143,8 +145,14 @@ public class ProductVo {
 		@JsonProperty(value="dispOrd")
 		@Schema(description = "표시순서", example = "0", required = true)
 		private int displayOrder; 
+		
+		@JsonProperty(value="prodKeyword")
+		@Schema(description = "상품키워드", example = "자켓,고어택스,바람막이", required = true)
+		private String productKeyword; 
+		
+		@JsonProperty(value="keywordUpdtDt")
+		@Schema(description = "키워드 업데이트 일자", example = "20230501", required = true)
+		private Date keywordUpdateDate; 
 	}
-
-	//public static Request Request;
 
 }

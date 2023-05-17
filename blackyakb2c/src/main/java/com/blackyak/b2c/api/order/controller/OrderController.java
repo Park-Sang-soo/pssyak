@@ -26,9 +26,9 @@ public class OrderController {
 	@Tag(name = "Order")
 	@Operation(summary = "주문상태체크", description = "주문번호를 받아 주문상태값을 체크하는 API")
 	@GetMapping("/orderstate/{coOrderNo}")
-	public List<OrderStateVo.Response> findOrderState(@Parameter(description = "주문번호") 
-								      @PathVariable("coOrderNo") String coOrderNo, 
-								      OrderStateVo.Request request){	
+	public List<OrderStateVo.Response> getOrderState(@Parameter(description = "주문번호") 
+												     @PathVariable("coOrderNo") String coOrderNo, 
+												     OrderStateVo.Request request){	
 		
 		List<OrderStateVo.Response> Response = orderService.findOrderState(request);
 		

@@ -2,8 +2,11 @@ package com.blackyak.b2c.api.product.service;
 
 import org.springframework.stereotype.Service;
 
-import com.blackyak.b2c.common.db.mapper.ProductMapper;
-import com.blackyak.b2c.common.db.dto.ProductDto;
+import com.blackyak.b2c.common.db.repository.ProductInfoRepository;
+
+import lombok.RequiredArgsConstructor;
+
+import com.blackyak.b2c.common.db.entity.ProductInfoEntity;
 import com.blackyak.b2c.api.product.vo.ProductVo;
 
 /**
@@ -17,53 +20,49 @@ import com.blackyak.b2c.api.product.vo.ProductVo;
  * @return 제품 상세정보 목록
  *
  */
+
+@RequiredArgsConstructor
 @Service
 public class ProductService {	
 	
-	private static ProductMapper productMapper;
-
-    public ProductService(ProductMapper productMapper) {
-        this.productMapper = productMapper;
-    }
+	private final ProductInfoRepository productInfoRepository;
 	
-	public static ProductVo.Response selectProductInfo(ProductVo.Request request) {
-		
-		ProductDto productConditionDto = ProductDto.builder()
-				.compCd(request.getCompanyCode())
-				.prodCd(request.getProductCode())
-				.colrCd(request.getColorCode())
-				.sizeCd(request.getSizeCode())
-				.build();
-		
-		ProductDto productResultDto = productMapper.selectProductInfo(productConditionDto);
-		
+	public ProductVo.Response selectProductInfo(ProductVo.Request request) {
+				
+		ProductInfoEntity productInfo = productInfoRepository.findByCompanyCodeAndProductCodeAndColorCodeAndSizeCode(request.getCompanyCode(), 
+																													 request.getProductCode(), 
+																													 request.getColorCode(), 
+																													 request.getSizeCode());
+				
 		return ProductVo.Response.builder()
-				.companyCode(productResultDto.getCompCd())				
-				.refCompanyCode(productResultDto.getRefCompCd())
-				.goodsGubun(productResultDto.getGoodsGb())
-				.brandCode(productResultDto.getBrndCd())
-				.productCode(productResultDto.getProdCd())
-				.productName(productResultDto.getProdNm())
-				.productDivision(productResultDto.getProdDiv())
-				.productDivisionName(productResultDto.getProdDivNm())
-				.goodKindCode(productResultDto.getGoodKindCd())
-				.goodKindName(productResultDto.getGoodKindNm())
-				.planYear(productResultDto.getPlanYear())
-				.planYearName(productResultDto.getPlanYearNm())
-				.seasonCode(productResultDto.getSesnCd())
-				.seasonName(productResultDto.getSesnNm())
-				.sexDivision(productResultDto.getSexDiv())
-				.sexDivisionName(productResultDto.getSexDivNm())
-				.productLineCode(productResultDto.getProdLineCd())
-				.productLineName(productResultDto.getProdLineNm())
-				.colorCode(productResultDto.getColrCd())
-				.colorName(productResultDto.getColrNm())
-				.sizeCode(productResultDto.getSizeCd())
-				.normalRetailPrice(productResultDto.getNormRtalPrce())
-				.madeYymm(productResultDto.getMadeYymm())
-				.originNativeCode(productResultDto.getOrigNatCd())
-				.originNativeName(productResultDto.getOrigNatNm())
-				.displayOrder(productResultDto.getDispOrd())
+				.companyCode(productInfo.getCompanyCode())				
+				.refCompanyCode(productInfo.getRefCompanyCode())
+				.goodsGubun(productInfo.getGoodsGubun())
+				.brandCode(productInfo.getBrandCode())
+				.productCode(productInfo.getProductCode())
+				.productName(productInfo.getProductName())
+				.productDivision(productInfo.getProductDivision())
+				.productDivisionName(productInfo.getProductDivisionName())
+				.goodKindCode(productInfo.getGoodKindCode())
+				.goodKindName(productInfo.getGoodKindName())
+				.planYear(productInfo.getPlanYear())
+				.planYearName(productInfo.getPlanYearName())
+				.seasonCode(productInfo.getSeasonCode())
+				.seasonName(productInfo.getSeasonName())
+				.sexDivision(productInfo.getSexDivision())
+				.sexDivisionName(productInfo.getSexDivisionName())
+				.productLineCode(productInfo.getProductLineCode())
+				.productLineName(productInfo.getProductLineName())
+				.colorCode(productInfo.getColorCode())
+				.colorName(productInfo.getColorName())
+				.sizeCode(productInfo.getSizeCode())
+				.normalRetailPrice(productInfo.getNormalRetailPrice())
+				.madeYymm(productInfo.getMadeYymm())
+				.originNativeCode(productInfo.getOriginNativeCode())
+				.originNativeName(productInfo.getOriginNativeName())
+				.displayOrder(productInfo.getDisplayOrder())
+				.productKeyword(productInfo.getProductKeyword())
+				.keywordUpdateDate(productInfo.getKeywordUpdateDate())
 				.build();
 	}
 }
