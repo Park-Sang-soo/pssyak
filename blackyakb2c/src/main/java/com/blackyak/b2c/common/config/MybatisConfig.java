@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
+/*
 @Configuration
 @MapperScan(value = "com.blackyak.b2c.common.db.mapper")
 public class MybatisConfig {
@@ -32,3 +33,4 @@ public class MybatisConfig {
 	} 
 }
 
+*/

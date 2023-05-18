@@ -6,11 +6,14 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.blackyak.b2c.common.db.entity.OrderStateEntity;
+import com.blackyak.b2c.common.db.mapper.OrderStateMapper;
+import com.blackyak.b2c.common.db.mapper.ProductInfoMapper;
 import com.blackyak.b2c.common.db.repository.OrderStateRepository;
 
 import lombok.RequiredArgsConstructor;
 
 import com.blackyak.b2c.api.order.vo.OrderStateVo;
+import com.blackyak.b2c.api.product.vo.ProductVo;
 
 /**
  * 주문 상태(findOrderState)
@@ -28,28 +31,15 @@ public class OrderService {
 		
 	private final OrderStateRepository orderStateRepository;
 	
+	private final OrderStateMapper orderStateMapper;
+	
 	public List<OrderStateVo.Response> findOrderState(OrderStateVo.Request request) {
 		
 		List<OrderStateEntity> orderStateList = orderStateRepository.findByCoOrderNoAndCoSequence(request.getCoOrderNo(), request.getCoSequence());		
 		
-		List<OrderStateVo.Response> responseList = orderStateList.stream()
-											        .map(OrderStateEntity -> {
-											            OrderStateVo.Response response = new OrderStateVo.Response();
-											            response.setEaiiNumber(OrderStateEntity.getEaiiNumber());
-											            response.setEaiiType(OrderStateEntity.getEaiiType());
-											            response.setEaiiYesNo(OrderStateEntity.getEaiiYesNo());
-											            response.setEaicDate(OrderStateEntity.getEaicDate());
-											            response.setEaisDate(OrderStateEntity.getEaisDate());
-											            response.setCompanyCode(OrderStateEntity.getCompanyCode());
-											            response.setCoOrderNo(OrderStateEntity.getCoOrderNo());
-											            response.setCoSequence(OrderStateEntity.getCoSequence());
-											            response.setTransmissionState(OrderStateEntity.getTransmissionState());
-											            response.setCancelYn(OrderStateEntity.getCancelYn());
-											            response.setErrorName(OrderStateEntity.getErrorName());
-											            return response;
-											        })
-											        .collect(Collectors.toList());
-		return responseList;
+		List<OrderStateVo.Response> response = orderStateMapper.ToVo(orderStateList);
+		
+		return response;		
     }
 	
 }
