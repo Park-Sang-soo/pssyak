@@ -7,7 +7,7 @@ import com.blackyak.b2c.common.db.repository.ProductInfoRepository;
 import lombok.RequiredArgsConstructor;
 
 import com.blackyak.b2c.common.db.entity.ProductInfoEntity;
-import com.blackyak.b2c.common.db.mapper.ProductInfoMapper;
+import com.blackyak.b2c.api.product.mapper.ProductInfoMapper;
 import com.blackyak.b2c.api.product.vo.ProductVo;
 
 /**
@@ -36,7 +36,7 @@ public class ProductService {
 																													 request.getProductCode(), 
 																													 request.getColorCode(), 
 																													 request.getSizeCode());
-		ProductVo.Response response = productInfoMapper.ToVo(productInfo);
+		ProductVo.Response response = productInfoMapper.toProductVoResponse(productInfo);
 		
 		return response;
 	}

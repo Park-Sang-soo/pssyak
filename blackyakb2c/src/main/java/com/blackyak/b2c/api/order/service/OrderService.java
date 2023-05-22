@@ -1,19 +1,16 @@
 package com.blackyak.b2c.api.order.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.blackyak.b2c.common.db.entity.OrderStateEntity;
-import com.blackyak.b2c.common.db.mapper.OrderStateMapper;
-import com.blackyak.b2c.common.db.mapper.ProductInfoMapper;
 import com.blackyak.b2c.common.db.repository.OrderStateRepository;
 
 import lombok.RequiredArgsConstructor;
 
+import com.blackyak.b2c.api.order.mapper.OrderStateMapper;
 import com.blackyak.b2c.api.order.vo.OrderStateVo;
-import com.blackyak.b2c.api.product.vo.ProductVo;
 
 /**
  * 주문 상태(findOrderState)
@@ -37,7 +34,7 @@ public class OrderService {
 		
 		List<OrderStateEntity> orderStateList = orderStateRepository.findByCoOrderNoAndCoSequence(request.getCoOrderNo(), request.getCoSequence());		
 		
-		List<OrderStateVo.Response> response = orderStateMapper.ToVo(orderStateList);
+		List<OrderStateVo.Response> response = orderStateMapper.toOrderStateVoResponse(orderStateList);
 		
 		return response;		
     }

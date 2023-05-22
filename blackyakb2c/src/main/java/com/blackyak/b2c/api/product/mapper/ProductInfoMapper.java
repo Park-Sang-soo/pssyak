@@ -1,4 +1,4 @@
-package com.blackyak.b2c.common.db.mapper;
+package com.blackyak.b2c.api.product.mapper;
 
 import org.mapstruct.Mapper;
 
@@ -10,9 +10,9 @@ import com.blackyak.b2c.common.db.entity.ProductInfoEntity;
 public interface ProductInfoMapper { 	
 	
 	/* TODO : Entity 에서 Vo로 매핑*/
-	ProductVo.Response ToVo(ProductInfoEntity productInfoEntity);
+	ProductVo.Response toProductVoResponse(ProductInfoEntity productInfoEntity);
 	
 	/* TODO : Vo 에서 Entity로 매핑*/
-	ProductInfoEntity VoToEntity(ProductVo.Response ProductVo);
+	ProductInfoEntity toProductInfoEntity(ProductVo.Response ProductVo);
 	
 }

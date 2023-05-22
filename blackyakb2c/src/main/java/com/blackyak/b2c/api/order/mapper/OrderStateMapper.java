@@ -1,4 +1,4 @@
-package com.blackyak.b2c.common.db.mapper;
+package com.blackyak.b2c.api.order.mapper;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ import com.blackyak.b2c.common.db.entity.OrderStateEntity;
 public interface OrderStateMapper { 	
 	
 	/* TODO : Entity 에서 Vo로 매핑*/
-	List<OrderStateVo.Response> ToVo(List<OrderStateEntity> orderStateEntity);
+	List<OrderStateVo.Response> toOrderStateVoResponse(List<OrderStateEntity> orderStateEntity);
 	
 	/* TODO : Vo 에서 Entity로 매핑*/
-	List<OrderStateEntity> VoToEntity(List<OrderStateVo.Response> orderStateVo);
+	List<OrderStateEntity> toOrderStateEntity(List<OrderStateVo.Response> orderStateVo);
 	
 }
