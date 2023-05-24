@@ -31,11 +31,17 @@ dependencies {
 	
 	//springSecurity
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	
+    
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
+	implementation 'org.projectlombok:lombok:1.18.18'
 	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 	
+	// MapStruct
+	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+		
 	// XML -> JSON 관련 implementation
 	implementation group: 'org.json', name: 'json', version: '20210307'
 	implementation group: 'commons-io', name: 'commons-io', version: '2.9.0'
@@ -46,7 +52,7 @@ dependencies {
 	
 	// JPA
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
+	
 }
 
 tasks.named('test') {
