@@ -9,10 +9,10 @@ import com.blackyak.b2c.common.db.entity.ProductInfoEntity;
 @Mapper(componentModel = "spring")
 public interface ProductInfoMapper { 	
 	
-	/* TODO : Entity 에서 Vo로 매핑*/
+	// Entity 에서 Vo로 매핑
 	ProductVo.Response toProductVoResponse(ProductInfoEntity productInfoEntity);
 	
-	/* TODO : Vo 에서 Entity로 매핑*/
+	// Vo 에서 Entity로 매핑
 	ProductInfoEntity toProductInfoEntity(ProductVo.Response ProductVo);
 	
 }

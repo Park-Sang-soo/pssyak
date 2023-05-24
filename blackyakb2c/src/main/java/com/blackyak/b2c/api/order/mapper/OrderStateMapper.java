@@ -11,10 +11,10 @@ import com.blackyak.b2c.common.db.entity.OrderStateEntity;
 @Mapper(componentModel = "spring")
 public interface OrderStateMapper { 	
 	
-	/* TODO : Entity 에서 Vo로 매핑*/
+	// Entity 에서 Vo로 매핑
 	List<OrderStateVo.Response> toOrderStateVoResponse(List<OrderStateEntity> orderStateEntity);
 	
-	/* TODO : Vo 에서 Entity로 매핑*/
+	// Vo 에서 Entity로 매핑
 	List<OrderStateEntity> toOrderStateEntity(List<OrderStateVo.Response> orderStateVo);
 	
 }
