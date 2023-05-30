@@ -7,12 +7,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.blackyak.b2c.api.product.service.ProductService;
 import com.blackyak.b2c.api.product.vo.ProductVo;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/products")
@@ -26,11 +30,22 @@ public class ProductController {
 	@GetMapping("/product/{productCode}")
 	public ProductVo.Response getProduct(@Parameter(description = "제품코드") 
 										 @PathVariable("productCode") String productCode, 
-										 ProductVo.Request request){		
+										 ProductVo.Request request){	
+		
+		log.info(request.getCompanyCode() + " / " + request.getProductCode()+ " / " + request.getColorCode() + " / " + request.getSizeCode());
 					
 		request.setProductCode(productCode);
 		ProductVo.Response response = productService.selectProductInfo(request);
-				
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		try {
+            String JsonResponse = objectMapper.writeValueAsString(response);
+            log.info("ResponseResult: " + JsonResponse);
+		} catch (JsonProcessingException e) {
+			log.error("JsonFail :", e);
+		}	
+		
 		return response;		
 	}
 	
