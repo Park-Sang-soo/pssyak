@@ -3,6 +3,8 @@
 
 <!-- 파일의 변경을 확인 하여 변경시 갱신 -->
 <configuration scan="true">
+	<!-- 로그 패턴에 색상 적용 %clr(pattern){color} -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
 	
 	<!-- 로그 파일이 저장될 경로 -->
     <property name="LOG_PATH" value="/Users/ADMIN/logback"/>
@@ -14,7 +16,7 @@
     <property name="ERR_LOG_FILE_NAME" value="error_log"/>
     
     <!-- 로그 출력 패턴 -->
-    <property name="LOG_PATTERN" value="%-5level %d{yy-MM-dd HH:mm:ss}[%thread] : [%logger{0}:%line] - %msg%n"/>
+    <property name="LOG_PATTERN" value="%clr(%-5level) %d{yy-MM-dd HH:mm:ss}[%thread] %clr([traceId=%X{traceId}]) : %clr([%logger{0}:%line]) - %msg%n"/>
 	
 	<!-- 로그 레벨 -->
 	<property name="LOG_LEVEL" value="info"/>

@@ -9,16 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.blackyak.b2c.api.order.service.OrderService;
 import com.blackyak.b2c.api.order.vo.OrderStateVo;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/orders")
@@ -34,21 +30,8 @@ public class OrderController {
 												     @PathVariable("coOrderNo") String coOrderNo, 
 												     OrderStateVo.Request request){	
 		
-		log.info(request.getCoOrderNo() + " / " + request.getCoSequence());
-		
 		List<OrderStateVo.Response> Response = orderService.findOrderState(request);
-		
-		ObjectMapper objectMapper = new ObjectMapper();
-		
-		try {
-			for (OrderStateVo.Response orderResponse : Response) {
-	            String JsonResponse = objectMapper.writeValueAsString(orderResponse);
-	            log.info("ResponseResult: " + JsonResponse);
-	        }
-		} catch (JsonProcessingException e) {
-			log.error("JsonFail :", e);
-		}
-						
+					
 		return Response;
 	}	
 }
