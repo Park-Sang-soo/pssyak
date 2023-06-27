@@ -26,6 +26,7 @@ public class SecurityConfig {
 		http
 			.cors()
 			.and()
+			.csrf().disable() //swagger에서 API 호출시 403 Error 발생 금지 
 			.authorizeHttpRequests()
         			.antMatchers("/products/**").permitAll()
         			.antMatchers("/orders/**").permitAll()

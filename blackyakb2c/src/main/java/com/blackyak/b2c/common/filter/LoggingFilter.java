@@ -15,16 +15,19 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
 public class LoggingFilter extends OncePerRequestFilter{	
-	
+		
 	@Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-		
-        MDC.put("traceId", UUID.randomUUID().toString());
+					
+        MDC.put("traceId", UUID.randomUUID().toString().replace("-", "").substring(0, 10));
         doFilterWrapped(request, response, filterChain);
         MDC.clear();
         
@@ -47,11 +50,21 @@ public class LoggingFilter extends OncePerRequestFilter{
     public void logRequest(ContentCachingRequestWrapper request) throws IOException {
     	
         String queryString = request.getQueryString();
-        
-        log.info("Request : {} uri=[{}] content-type=[{}]",
+                        
+        log.info("\n==========[ Request ]==========" + "\n" 
+        	   + "Method=[{}] " + "\n"
+        	   + "uri=[{}] " + "\n"
+        	   + "Header referer=[{}]" + "\n"
+        	   + "Header host=[{}]" + "\n"
+        	   + "Header userAgent=[{}]" + "\n"
+        	   + "content-type=[{}]",
                 request.getMethod(),
                 queryString == null ? request.getRequestURI() : request.getRequestURI() + "?" +queryString,
+        		request.getHeader("referer"),
+        		request.getHeader("host"),
+        		request.getHeader("user-Agent"),
                 request.getContentType()
+                
         );
         
         if(request.getContentType() == null)
@@ -61,12 +74,48 @@ public class LoggingFilter extends OncePerRequestFilter{
     public void logResponse(ContentCachingResponseWrapper response) throws IOException {
         
         byte[] content = StreamUtils.copyToByteArray(response.getContentInputStream());
-        if (content.length > 0) {
-            String contentString = new String(content);
-            log.info("Response[{}] : {}", 
-            		response.getStatus(), 
-            		contentString
+        String contentString = new String(content);  
+        
+        if (content.length > 0) {                
+            
+            if (isJSONContent(contentString)) {
+                  
+	            ObjectMapper objectMapper = new ObjectMapper();
+	            Object json = objectMapper.readValue(contentString, Object.class);
+	            String jsonContent = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);            
+	                        
+	            log.info("\n==========[ Response ]==========" + "\n"
+	            		+ "Status=[{}] " + "\n"
+	            		+ "Content={}",
+	            		response.getStatus(),
+	            		jsonContent
+	            );
+            
+            } else {
+                log.info("\n==========[ Response ]==========" + "\n"
+                        + "Status=[{}] " + "\n"
+                        + "Content={}",
+                        response.getStatus(),
+                        contentString
+                );
+            }
+        } else {  
+        	
+        	log.info("\n==========[ Response ]==========" + "\n"
+                    + "Status=[{}] " + "\n"
+                    + "Content={}",
+                    response.getStatus(),
+                    contentString
             );
         }
-    }    
+    }
+    
+    private boolean isJSONContent(String contentString) {
+        try {
+            new ObjectMapper().readTree(contentString);
+            return true;
+        } catch (JsonProcessingException e) {
+            return false;
+        }
+    }
 }
