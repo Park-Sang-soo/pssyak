@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonUtil {
 	
-	private static final ObjectMapper objectMapper = new ObjectMapper();
+	private static final ObjectMapper objectMapper = new ObjectMapper(); 
 
     public static String JavaToJson(Object object) throws JsonProcessingException {
         return objectMapper.writeValueAsString(object);

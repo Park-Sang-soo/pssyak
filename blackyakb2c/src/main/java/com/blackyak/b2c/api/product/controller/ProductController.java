@@ -56,7 +56,7 @@ public class ProductController {
 	@Tag(name = "Product")
 	@Operation(summary = "상품데이터 수정", description = "상품데이터의 수정을 요청하는 API")
 	@PutMapping("/product/{productNumber}")
-	public String putProduct(@Parameter(description = "상품번호") 
+	public String putProduct(@Parameter(description = "상품번호")  
 	 						 @PathVariable("productNumber") int productNumber) throws JsonProcessingException{	
 		
 		LocalDateTime now = LocalDateTime.now();

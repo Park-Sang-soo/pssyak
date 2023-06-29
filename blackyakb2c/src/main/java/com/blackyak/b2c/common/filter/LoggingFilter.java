@@ -29,7 +29,7 @@ public class LoggingFilter extends OncePerRequestFilter{
 					
         MDC.put("traceId", UUID.randomUUID().toString().replace("-", "").substring(0, 10));
         doFilterWrapped(request, response, filterChain);
-        MDC.clear();
+        MDC.clear(); 
         
     }
 
@@ -39,7 +39,7 @@ public class LoggingFilter extends OncePerRequestFilter{
         ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(response);
         
         try {
-            logRequest(requestWrapper);
+            logRequest(requestWrapper); 
             doFilter(requestWrapper, responseWrapper, filterChain);
         } finally {
             logResponse(responseWrapper);
