@@ -13,7 +13,7 @@ public class JsonUtil {
     
     public static boolean isJSONContent(String contentString) {
     	try {
-            objectMapper.readTree(contentString);
+            objectMapper.readTree(contentString); 
             return true;
         } catch (JsonProcessingException e) {
             return false;

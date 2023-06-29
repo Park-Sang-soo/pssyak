@@ -74,7 +74,7 @@ public class LoggingFilter extends OncePerRequestFilter{
     public void logResponse(ContentCachingResponseWrapper response) throws IOException {
         
         byte[] content = StreamUtils.copyToByteArray(response.getContentInputStream());
-        String contentString = new String(content);
+        String contentString = new String(content); 
                 
         if (content.length > 0 && content != null) {      
         	ObjectMapper objectMapper = new ObjectMapper();
