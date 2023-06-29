@@ -15,7 +15,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.blackyak.b2c.common.util.JsonUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -74,48 +74,24 @@ public class LoggingFilter extends OncePerRequestFilter{
     public void logResponse(ContentCachingResponseWrapper response) throws IOException {
         
         byte[] content = StreamUtils.copyToByteArray(response.getContentInputStream());
-        String contentString = new String(content);  
-        
-        if (content.length > 0) {                
+        String contentString = new String(content);
+                
+        if (content.length > 0 && content != null) {      
+        	ObjectMapper objectMapper = new ObjectMapper();
             
-            if (isJSONContent(contentString)) {
-                  
-	            ObjectMapper objectMapper = new ObjectMapper();
+            if (JsonUtil.isJSONContent(contentString)) {     
 	            Object json = objectMapper.readValue(contentString, Object.class);
-	            String jsonContent = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);            
-	                        
-	            log.info("\n==========[ Response ]==========" + "\n"
-	            		+ "Status=[{}] " + "\n"
-	            		+ "Content={}",
-	            		response.getStatus(),
-	            		jsonContent
-	            );
-            
-            } else {
-                log.info("\n==========[ Response ]==========" + "\n"
-                        + "Status=[{}] " + "\n"
-                        + "Content={}",
-                        response.getStatus(),
-                        contentString
-                );
+	            contentString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);       
             }
-        } else {  
+        } else {
+        	contentString = "";
+        }
         	
-        	log.info("\n==========[ Response ]==========" + "\n"
-                    + "Status=[{}] " + "\n"
-                    + "Content={}",
-                    response.getStatus(),
-                    contentString
-            );
-        }
-    }
-    
-    private boolean isJSONContent(String contentString) {
-        try {
-            new ObjectMapper().readTree(contentString);
-            return true;
-        } catch (JsonProcessingException e) {
-            return false;
-        }
+    	log.info("\n==========[ Response ]==========" + "\n"
+                + "Status=[{}] " + "\n"
+                + "Content={}",
+                response.getStatus(),
+                contentString
+        );
     }
 }

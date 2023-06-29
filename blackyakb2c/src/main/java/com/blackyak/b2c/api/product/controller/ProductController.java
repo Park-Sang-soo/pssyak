@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.blackyak.b2c.api.product.service.ProductService;
 import com.blackyak.b2c.api.product.vo.ProductVo;
 import com.blackyak.b2c.api.product.vo.ProductVo.RequestTest.RequestTestBuilder;
+import com.blackyak.b2c.common.util.JsonUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -40,16 +40,15 @@ public class ProductController {
 		request.setProductCode(productCode);		
 		ProductVo.Response response = productService.selectProductInfo(request);
 				
-		return response;		
+		return response;
 	}		
 	
 	@Tag(name = "Product")
 	@Operation(summary = "상품데이터 생성", description = "상품데이터의 생성을 요청하는 API")
 	@PostMapping("/product")
 	public String postProduct(@RequestBody ProductVo.RequestTest requestTest) throws JsonProcessingException{	
-						
-		ObjectMapper objectMapper = new ObjectMapper();
-		String result = objectMapper.writeValueAsString(requestTest);
+				
+		String result = JsonUtil.JavaToJson(requestTest);
 		
 		return result;
 	}	
@@ -69,8 +68,7 @@ public class ProductController {
 																		.saleStartDate(now)
 																		.saleEndDate(now);
 		
-		ObjectMapper objectMapper = new ObjectMapper();
-		String result = objectMapper.writeValueAsString(resultBuilder.build());
+		String result = JsonUtil.JavaToJson(resultBuilder.build());
 		
 		return result;
 	}	
@@ -78,22 +76,11 @@ public class ProductController {
 	@Tag(name = "Product")
 	@Operation(summary = "상품데이터 삭제", description = "상품데이터의 삭제를 요청하는 API")
 	@DeleteMapping("/product/{productNumber}")
-	public String deleteProduct(@Parameter(description = "상품번호") 
-	 							@PathVariable("productNumber") int productNumber) throws JsonProcessingException{	
-								
-		LocalDateTime now = LocalDateTime.now();
+	public void deleteProduct(@Parameter(description = "상품번호") 
+	 							@PathVariable("productNumber") int productNumber){	
 		
-		RequestTestBuilder resultBuilder = ProductVo.RequestTest.builder().deleteGubun("Y")
-																		.productName("Jacket")
-																		.productPrice(10000)
-																		.salePrice(5000)
-																		.saleStartDate(now)
-																		.saleEndDate(now);
+		System.out.println("성공");
 		
-		ObjectMapper objectMapper = new ObjectMapper();
-		String result = objectMapper.writeValueAsString(resultBuilder.build());
-		
-		return result;
 	}	
 	
 }
