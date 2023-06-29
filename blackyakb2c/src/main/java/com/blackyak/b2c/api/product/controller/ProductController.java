@@ -79,7 +79,7 @@ public class ProductController {
 	public void deleteProduct(@Parameter(description = "상품번호") 
 	 							@PathVariable("productNumber") int productNumber){	
 		
-		System.out.println("성공");
+		System.out.println("성공"); 
 		
 	}	
 	

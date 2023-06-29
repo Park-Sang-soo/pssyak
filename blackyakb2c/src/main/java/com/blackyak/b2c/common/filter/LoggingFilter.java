@@ -35,7 +35,7 @@ public class LoggingFilter extends OncePerRequestFilter{
 
     public void doFilterWrapped(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
     	
-        ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request);
+        ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request); 
         ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(response);
         
         try {

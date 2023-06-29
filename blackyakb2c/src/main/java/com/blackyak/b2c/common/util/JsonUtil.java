@@ -18,6 +18,6 @@ public class JsonUtil {
         } catch (JsonProcessingException e) {
             return false;
         }
-    }
+    } 
 
 }
