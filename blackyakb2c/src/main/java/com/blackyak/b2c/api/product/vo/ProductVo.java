@@ -1,8 +1,14 @@
 package com.blackyak.b2c.api.product.vo;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -32,6 +38,39 @@ public class ProductVo {
 		
 		@ApiModelProperty(value = "사이즈코드")
 		private String sizeCode;
+		
+	}
+	
+	@Getter
+	@Setter
+	@Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+	public static class RequestTest {
+		
+		@ApiModelProperty(value = "상품명")
+		private String productName;		
+		
+		@ApiModelProperty(value = "상품가격")
+		private int productPrice;		
+		
+		@ApiModelProperty(value = "판매가격")
+		private int salePrice;
+		
+		@ApiModelProperty(value = "판매시작일")
+		@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+		@JsonSerialize(using = LocalDateTimeSerializer.class)
+	    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+		private LocalDateTime saleStartDate;
+		
+		@ApiModelProperty(value = "판매종료일")
+		@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+		@JsonSerialize(using = LocalDateTimeSerializer.class)
+	    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+		private LocalDateTime saleEndDate;
+		
+		@ApiModelProperty(value = "삭제여부")
+		private String deleteGubun;
 		
 	}
 	
