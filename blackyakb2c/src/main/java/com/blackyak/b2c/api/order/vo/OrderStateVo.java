@@ -2,6 +2,11 @@ package com.blackyak.b2c.api.order.vo;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -21,10 +26,12 @@ public class OrderStateVo {
     @AllArgsConstructor
 	public static class Request {
 		
+		@NotNull(message = "[Request] 주문번호는 필수 값입니다.")
 		@ApiModelProperty(value = "주문번호", hidden = true)
 		private String coOrderNo;		
 		
 		@ApiModelProperty(value = "주문순번")
+		@NotBlank(message = "[Request] 주문번호는 필수 값입니다.")		
 		private String coSequence;		
 		
 	}
