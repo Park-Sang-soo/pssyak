@@ -3,6 +3,10 @@ package com.blackyak.b2c.api.product.vo;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -26,16 +30,21 @@ public class ProductVo {
     @NoArgsConstructor
     @AllArgsConstructor
 	public static class Request {
-		
+	
+		@NotNull(message = "[Request] 회사코드는 필수 값입니다.")
+		@Size(max=3, min=3, message = "[Request] 회사코드는 3자리 입니다.")	
 		@ApiModelProperty(value = "회사코드")
 		private String companyCode;		
 		
+		@NotNull(message = "[Request] 제품코드는 필수 값입니다.")
 		@ApiModelProperty(value = "제품코드", hidden = true)
 		private String productCode;		
 		
+		@NotNull(message = "[Request] 칼라코드는 필수 값입니다.")
 		@ApiModelProperty(value = "칼라코드")
 		private String colorCode;
 		
+		@NotNull(message = "[Request] 사이즈코드는 필수 값입니다.")
 		@ApiModelProperty(value = "사이즈코드")
 		private String sizeCode;
 		
@@ -48,6 +57,7 @@ public class ProductVo {
     @AllArgsConstructor
 	public static class RequestTest {
 		
+		@NotBlank(message = "[Request] 상품명은 필수 값입니다.")
 		@ApiModelProperty(value = "상품명")
 		private String productName;		
 		

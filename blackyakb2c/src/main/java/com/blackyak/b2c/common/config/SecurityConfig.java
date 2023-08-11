@@ -30,6 +30,7 @@ public class SecurityConfig {
 			.authorizeHttpRequests()
         			.antMatchers("/products/**").permitAll()
         			.antMatchers("/orders/**").permitAll()
+        			.antMatchers("/members/**").permitAll()
         			.antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll()
         			.anyRequest().authenticated();        			
 		

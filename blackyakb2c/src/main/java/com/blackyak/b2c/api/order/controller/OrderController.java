@@ -2,8 +2,12 @@ package com.blackyak.b2c.api.order.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +20,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
 @RestController
+@Validated
 @RequiredArgsConstructor
 @RequestMapping("/orders")
 @Tag(name = "Order", description = "JPA로 주문상태 API 정보를 제공하는 Controller")
@@ -28,7 +33,7 @@ public class OrderController {
 	@GetMapping("/orderstate/{coOrderNo}")
 	public List<OrderStateVo.Response> getOrderState(@Parameter(description = "주문번호") 
 												     @PathVariable("coOrderNo") String coOrderNo, 
-												     OrderStateVo.Request request){	
+												     @Valid OrderStateVo.Request request){	
 		
 		List<OrderStateVo.Response> Response = orderService.findOrderState(request);
 					
