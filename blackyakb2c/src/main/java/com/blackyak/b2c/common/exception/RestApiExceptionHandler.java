@@ -2,8 +2,10 @@ package com.blackyak.b2c.common.exception;
 
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 
 import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -11,19 +13,40 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.blackyak.b2c.common.code.ExceptionCode;
 import com.blackyak.b2c.common.util.ExceptionResponse;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @RestControllerAdvice
 public class RestApiExceptionHandler {
 
 	@ExceptionHandler(BindException.class)
     public ExceptionResponse handleBindException(BindException e,
-								             HttpServletResponse response ) {
-		
+								             HttpServletResponse response ) {		
+        		
 		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+		
+		List<String> errorMessages = new ArrayList<>();
+	    for (FieldError fieldError : e.getFieldErrors()) {
+	        errorMessages.add(fieldError.getDefaultMessage());
+	    }
 		
         return ExceptionResponse.builder()
 		        		 .exceptionCode(ExceptionCode.INVALID_REQUEST_PARAMETER.getExceptionCode())
 		                 .exceptionMessage(ExceptionCode.INVALID_REQUEST_PARAMETER.getExceptionMessage())
+		                 .bindMessage(errorMessages)
+		                 .build();
+    }
+	
+	@ExceptionHandler(ConstraintViolationException.class)
+    public ExceptionResponse handleConstraintViolationException(ConstraintViolationException e,
+								             HttpServletResponse response ) {		
+        		
+		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);		
+				
+        return ExceptionResponse.builder()
+		        		 .exceptionCode(ExceptionCode.INVALID_PATHVARIABLE_PARAMETER.getExceptionCode())
+		                 .exceptionMessage(ExceptionCode.INVALID_PATHVARIABLE_PARAMETER.getExceptionMessage())
 		                 .build();
     }
 	
@@ -72,6 +95,18 @@ public class RestApiExceptionHandler {
         return ExceptionResponse.builder()
 		        		 .exceptionCode(ExceptionCode.ENTITY_NOT_FOUND.getExceptionCode())
 		                 .exceptionMessage(ExceptionCode.ENTITY_NOT_FOUND.getExceptionMessage())
+		                 .build();
+    }
+	
+	@ExceptionHandler(Exception.class)
+    public ExceptionResponse handleException(Exception e,
+								             HttpServletResponse response ) {
+		
+		response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				
+        return ExceptionResponse.builder()
+		        		 .exceptionCode(String.valueOf(response.getStatus()))
+		                 .exceptionMessage(e.getClass().getName())
 		                 .build();
     }
 }

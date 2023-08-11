@@ -31,7 +31,7 @@ public class ProductVo {
     @AllArgsConstructor
 	public static class Request {
 	
-		//@NotNull(message = "[Request] 회사코드는 필수 값입니다.")
+		@NotNull(message = "[Request] 회사코드는 필수 값입니다.")
 		@Size(max=3, min=3, message = "[Request] 회사코드는 3자리 입니다.")	
 		@ApiModelProperty(value = "회사코드")
 		private String companyCode;		

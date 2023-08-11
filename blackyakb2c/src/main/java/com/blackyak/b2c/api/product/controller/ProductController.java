@@ -3,6 +3,7 @@ package com.blackyak.b2c.api.product.controller;
 import java.time.LocalDateTime;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Size;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,7 +39,9 @@ public class ProductController {
 	@Operation(summary = "제품상세정보조회", description = "제품코드를 받아 제품상세정보를 조회하는 API")
 	@GetMapping("/product/{productCode}")
 	public ProductVo.Response getProduct(@Parameter(description = "제품코드") 
-										 @PathVariable("productCode") String productCode, 
+										 @PathVariable("productCode") 
+										 @Size(min= 10) 
+										 String productCode, 
 										 @Valid ProductVo.Request request){	
 							
 		request.setProductCode(productCode);		
