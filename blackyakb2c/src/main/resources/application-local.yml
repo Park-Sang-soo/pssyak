@@ -2,6 +2,9 @@ server:
   port: '8080'
   
 spring:
+  config:
+    activate:
+      on-profile: local
   application:
     name: blackyakb2c-local
   datasource:
