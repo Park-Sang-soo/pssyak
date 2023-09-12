@@ -1,0 +1,21 @@
+server:
+  port: '8081'
+  
+spring:
+  config:
+    activate:
+      on-profile: prod
+  application:
+    name: blackyakb2c-prod
+  datasource:
+    url: jdbc:oracle:thin:@121.254.249.72:9521:YAKERP
+
+      
+
+    
+    
+    
+    
+
+
+    

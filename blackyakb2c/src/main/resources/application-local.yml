@@ -1,0 +1,21 @@
+server:
+  port: '8080'
+  
+spring:
+  config:
+    activate:
+      on-profile: local
+  application:
+    name: blackyakb2c-local
+  datasource:
+    url: jdbc:oracle:thin:@121.254.249.77:1521:YAKERP
+
+      
+
+    
+    
+    
+    
+
+
+    

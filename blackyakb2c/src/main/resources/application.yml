@@ -1,11 +1,11 @@
-server:
-  port: '8080'
-  
-spring:
+ spring:
+  profiles:
+      default: local
+  application:
+    name: blackyakb2c-prod
   datasource:
   #DB설정
     driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@121.254.249.77:1521:YAKERP
     username: US_B2C    
     password: US_B2C
   jpa:    
@@ -16,9 +16,7 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        '[format_sql]': true
-
-      
+        '[format_sql]': true     
 
     
     
