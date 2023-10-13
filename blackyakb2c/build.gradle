@@ -57,6 +57,10 @@ dependencies {
 	// LocalDateTime
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     implementation 'com.fasterxml.jackson.core:jackson-databind'    
+    
+    // JUnit5
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.5.2' 
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
 	
 }
 
